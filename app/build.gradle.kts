@@ -1,6 +1,9 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+
+    //firebase service
+    id("com.google.gms.google-services") version "4.4.1" apply false
 }
 
 android {
@@ -48,4 +51,7 @@ dependencies {
     //Splash screen Android 12
     implementation("androidx.core:core-splashscreen:1.0.0")
 
+    //add fireBase dependencies
+    implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
+    implementation("com.google.firebase:firebase-analytics")
 }
