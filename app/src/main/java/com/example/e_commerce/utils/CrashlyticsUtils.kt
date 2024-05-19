@@ -35,6 +35,7 @@ object CrashlyticsUtils {
     }
 
     // generic method to avoid create a log in one crash with a new variant and create a new separate crashlytics log
+    // reified it know what class is come
     inline fun <reified T : Exception> sendCustomLogToCrashlytics(
         msg: String, vararg keys: Pair<String, String>
     ) {

@@ -4,6 +4,8 @@ plugins {
 
     //firebase service
     id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
+
 }
 
 android {
@@ -55,4 +57,7 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-crashlytics")
+    //reactive network check internet is work or not
+    implementation ("com.github.pwittchen:reactivenetwork-rx2:3.0.8")
+
 }

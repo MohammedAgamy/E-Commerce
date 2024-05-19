@@ -9,6 +9,7 @@ import android.view.animation.AnticipateInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
 import androidx.lifecycle.lifecycleScope
+import com.training.ecommerce.utils.CrashlyticsUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         lifecycleScope.launch(Dispatchers.Main){
             Log.d("TAG" , "Crash in main ")
-            throw RuntimeException("Test Crash")
+            CrashlyticsUtils.sendLogToCrashlytics("crash button clicked " , "button" , "clicked")
         }
 
 

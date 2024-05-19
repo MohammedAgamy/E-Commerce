@@ -8,6 +8,7 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
+//manage application lifecycle
 class MyApplication :Application() {
 
     override fun onCreate() {
@@ -15,7 +16,6 @@ class MyApplication :Application() {
 
         listenToInternet()
     }
-
 
     @SuppressLint("CheckResult")
     fun listenToInternet()
