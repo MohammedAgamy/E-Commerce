@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
 
     //firebase service
-    id("com.google.gms.google-services") version "4.4.1" apply false
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -54,4 +54,5 @@ dependencies {
     //add fireBase dependencies
     implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
     implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-crashlytics")
 }
