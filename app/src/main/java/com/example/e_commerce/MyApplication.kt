@@ -8,7 +8,7 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class MyApplication :Application() {
+class MyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -18,22 +18,21 @@ class MyApplication :Application() {
 
 
     @SuppressLint("CheckResult")
-    fun listenToInternet()
-    {
-
+    fun listenToInternet() {
         ReactiveNetwork
             .observeInternetConnectivity()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { isConnectedToInternet: Boolean ->
-                Log.d(TAG ,"isConnectedToInternet $isConnectedToInternet" )
+                Log.d(TAG, "isConnectedToInternet $isConnectedToInternet")
                 // do something with isConnectedToInternet value
-                FirebaseCrashlytics.getInstance().setCustomKey("connected_to_internet", isConnectedToInternet)
+                FirebaseCrashlytics.getInstance()
+                    .setCustomKey("connected_to_internet", isConnectedToInternet)
             }
     }
 
 
-    companion object{
+    companion object {
         private const val TAG = "TAG"
     }
 }

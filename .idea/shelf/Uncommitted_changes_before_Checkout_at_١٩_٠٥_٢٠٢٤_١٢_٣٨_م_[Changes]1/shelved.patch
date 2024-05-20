@@ -1,0 +1,214 @@
+Index: app/src/main/java/com/example/e_commerce/MainActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.e_commerce\r\n\r\nimport android.animation.ObjectAnimator\r\nimport android.os.Build\r\nimport android.os.Bundle\r\nimport android.view.View\r\nimport android.view.animation.AnticipateInterpolator\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport androidx.core.animation.doOnEnd\r\n\r\nclass MainActivity : AppCompatActivity() {\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n        initSplashScreen()\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.activity_main)\r\n\r\n\r\n    }\r\n\r\n\r\n\r\n    //create splashScreen above android12\r\n    fun initSplashScreen() {\r\n        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.S) {\r\n            initSplashScreen()\r\n            //add callBack that`s called when the splashScreen in anim to the app content\r\n            splashScreen.setOnExitAnimationListener { splashScreenView ->\r\n                //create custom anim\r\n                val slidUp = ObjectAnimator.ofFloat(\r\n                    splashScreenView, View.TRANSLATION_Y, 0f, -splashScreenView.height.toFloat()\r\n                )\r\n                slidUp.interpolator = AnticipateInterpolator()\r\n                slidUp.duration = 3000L\r\n\r\n                //remove splashScreen at the end\r\n                slidUp.doOnEnd { splashScreenView.remove() }\r\n\r\n                //run your splash\r\n                slidUp.start()\r\n            }\r\n        } else {\r\n            setTheme(R.style.Theme_ECommerce)\r\n        }\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/e_commerce/MainActivity.kt b/app/src/main/java/com/example/e_commerce/MainActivity.kt
+--- a/app/src/main/java/com/example/e_commerce/MainActivity.kt	
++++ b/app/src/main/java/com/example/e_commerce/MainActivity.kt	
+@@ -3,10 +3,14 @@
+ import android.animation.ObjectAnimator
+ import android.os.Build
+ import android.os.Bundle
++import android.util.Log
+ import android.view.View
+ import android.view.animation.AnticipateInterpolator
+ import androidx.appcompat.app.AppCompatActivity
+ import androidx.core.animation.doOnEnd
++import androidx.lifecycle.lifecycleScope
++import kotlinx.coroutines.Dispatchers
++import kotlinx.coroutines.launch
+ 
+ class MainActivity : AppCompatActivity() {
+     override fun onCreate(savedInstanceState: Bundle?) {
+@@ -15,6 +19,12 @@
+         setContentView(R.layout.activity_main)
+ 
+ 
++        lifecycleScope.launch(Dispatchers.Main){
++            Log.d("TAG" , "Crash in main ")
++            throw RuntimeException("Test Crash")
++        }
++
++
+     }
+ 
+ 
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@drawable/ic_launcher_foreground\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.ECommerce\"\r\n        tools:targetApi=\"31\">\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:theme=\"@style/MainActivityTheme\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	
++++ b/app/src/main/AndroidManifest.xml	
+@@ -2,6 +2,8 @@
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools">
+ 
++    <uses-permission android:name="android.permission.INTERNET"/>
++    <!-- use any domain <usesCleartextTraffic> -->
+     <application
+         android:allowBackup="true"
+         android:dataExtractionRules="@xml/data_extraction_rules"
+@@ -11,6 +13,8 @@
+         android:roundIcon="@mipmap/ic_launcher_round"
+         android:supportsRtl="true"
+         android:theme="@style/Theme.ECommerce"
++        android:name=".MyApplication"
++        android:usesCleartextTraffic="true"
+         tools:targetApi="31">
+         <activity
+             android:name=".MainActivity"
+Index: app/src/main/java/com/example/e_commerce/utils/CrashlyticsUtils.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/e_commerce/utils/CrashlyticsUtils.kt b/app/src/main/java/com/example/e_commerce/utils/CrashlyticsUtils.kt
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/java/com/example/e_commerce/utils/CrashlyticsUtils.kt	
+@@ -0,0 +1,55 @@
++package com.training.ecommerce.utils
++
++import com.google.firebase.crashlytics.FirebaseCrashlytics
++
++object CrashlyticsUtils {
++
++    /**
++     * Endpoint Keys
++     */
++    const val CUSTOME_ENDPOINT_KEY = "CUSTOME_ENDPOINT_KEY"
++
++    /**
++     * random cases key
++     */
++    const val CUSTOM_KEY = "CUSTOM_KEY"
++    const val ADD_TOCART_KEY = "ADD_TOCART_KEY"
++    const val LOGIN_KEY = "LOGIN_KEY"
++    const val REGISTER_KEY = "REGISTER_KEY"
++    const val LOGIN_PROVIDER = "LOGIN_PROVIDER"
++    const val LISTEN_TO_USER_DETAILS = "LISTEN_TO_USER_DETAILS"
++
++
++    fun sendLogToCrashlytics(msg: String, vararg keys: String) {
++        keys.forEach { key ->
++            FirebaseCrashlytics.getInstance().setCustomKey(key, msg)
++        }
++        FirebaseCrashlytics.getInstance().recordException(CustomCrashlyticsLogException(msg))
++    }
++
++    fun sendLogToCrashlytics(msg: String, vararg keys: Pair<String, String>) {
++        keys.forEach { key ->
++            FirebaseCrashlytics.getInstance().setCustomKey(key.first, key.second)
++        }
++        FirebaseCrashlytics.getInstance().recordException(CustomCrashlyticsLogException(msg))
++    }
++
++    // generic method to avoid create a log in one crash with a new variant and create a new separate crashlytics log
++    inline fun <reified T : Exception> sendCustomLogToCrashlytics(
++        msg: String, vararg keys: Pair<String, String>
++    ) {
++        keys.forEach { key ->
++            FirebaseCrashlytics.getInstance().setCustomKey(key.first, key.second)
++        }
++
++        val exception = T::class.java.getConstructor(String::class.java).newInstance(msg)
++        FirebaseCrashlytics.getInstance().recordException(exception)
++    }
++
++}
++
++class CustomCrashlyticsLogException(message: String) : Exception(message)
++class AddToCartException(message: String) : Exception(message)
++class LoginException(message: String) : Exception(message)
++class RegisterException(message: String) : Exception(message)
++class UserDetailsException(message: String) : Exception(message)
+\ No newline at end of file
+Index: .idea/deploymentTargetDropDown.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"deploymentTargetDropDown\">\r\n    <value>\r\n      <entry key=\"App\">\r\n        <State />\r\n      </entry>\r\n    </value>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/deploymentTargetDropDown.xml b/.idea/deploymentTargetDropDown.xml
+--- a/.idea/deploymentTargetDropDown.xml	
++++ b/.idea/deploymentTargetDropDown.xml	
+@@ -3,7 +3,20 @@
+   <component name="deploymentTargetDropDown">
+     <value>
+       <entry key="App">
+-        <State />
++        <State>
++          <runningDeviceTargetSelectedWithDropDown>
++            <Target>
++              <type value="RUNNING_DEVICE_TARGET" />
++              <deviceKey>
++                <Key>
++                  <type value="SERIAL_NUMBER" />
++                  <value value="10186dae0506" />
++                </Key>
++              </deviceKey>
++            </Target>
++          </runningDeviceTargetSelectedWithDropDown>
++          <timeTargetWasSelectedWithDropDown value="2024-05-18T19:10:37.881216600Z" />
++        </State>
+       </entry>
+     </value>
+   </component>
+Index: app/src/main/java/com/example/e_commerce/MyApplication.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/e_commerce/MyApplication.kt b/app/src/main/java/com/example/e_commerce/MyApplication.kt
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/java/com/example/e_commerce/MyApplication.kt	
+@@ -0,0 +1,39 @@
++package com.example.e_commerce
++
++import android.annotation.SuppressLint
++import android.app.Application
++import android.util.Log
++import com.github.pwittchen.reactivenetwork.library.rx2.ReactiveNetwork
++import com.google.firebase.crashlytics.FirebaseCrashlytics
++import io.reactivex.android.schedulers.AndroidSchedulers
++import io.reactivex.schedulers.Schedulers
++
++class MyApplication :Application() {
++
++    override fun onCreate() {
++        super.onCreate()
++
++        listenToInternet()
++    }
++
++
++    @SuppressLint("CheckResult")
++    fun listenToInternet()
++    {
++
++        ReactiveNetwork
++            .observeInternetConnectivity()
++            .subscribeOn(Schedulers.io())
++            .observeOn(AndroidSchedulers.mainThread())
++            .subscribe { isConnectedToInternet: Boolean ->
++                Log.d(TAG ,"isConnectedToInternet $isConnectedToInternet" )
++                // do something with isConnectedToInternet value
++                FirebaseCrashlytics.getInstance().setCustomKey("connected_to_internet", isConnectedToInternet)
++            }
++    }
++
++
++    companion object{
++        private const val TAG = "TAG"
++    }
++}
+\ No newline at end of file

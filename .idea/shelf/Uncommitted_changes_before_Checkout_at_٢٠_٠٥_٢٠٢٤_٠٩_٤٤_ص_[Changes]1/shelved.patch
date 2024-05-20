@@ -1,0 +1,417 @@
+Index: app/src/main/res/navigation/login_graph.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/navigation/login_graph.xml b/app/src/main/res/navigation/login_graph.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/navigation/login_graph.xml	
+@@ -0,0 +1,11 @@
++<?xml version="1.0" encoding="utf-8"?>
++<navigation xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    android:id="@+id/login_graph"
++    app:startDestination="@id/logInFragment">
++
++    <fragment
++        android:id="@+id/logInFragment"
++        android:name="com.example.e_commerce.ui.login.fragments.LogInFragment"
++        android:label="LogInFragment" />
++</navigation>
+\ No newline at end of file
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\r\n    <string name=\"app_name\">E-Commerce</string>\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
+--- a/app/src/main/res/values/strings.xml	
++++ b/app/src/main/res/values/strings.xml	
+@@ -1,3 +1,47 @@
+ <resources>
+     <string name="app_name">E-Commerce</string>
++    <!-- Strings used for fragments for navigation -->
++    <string name="first_fragment_label">First Fragment</string>
++    <string name="second_fragment_label">Second Fragment</string>
++    <string name="next">Next</string>
++    <string name="previous">Previous</string>
++
++    <string name="lorem_ipsum">
++        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
++        volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
++        dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
++        litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend
++        diam, vel rutrum tellus vulputate quis. Aliquam eget libero aliquet, imperdiet nisl a,
++        ornare ex. Sed rhoncus est ut libero porta lobortis. Fusce in dictum tellus.\n\n
++        Suspendisse interdum ornare ante. Aliquam nec cursus lorem. Morbi id magna felis. Vivamus
++        egestas, est a condimentum egestas, turpis nisl iaculis ipsum, in dictum tellus dolor sed
++        neque. Morbi tellus erat, dapibus ut sem a, iaculis tincidunt dui. Interdum et malesuada
++        fames ac ante ipsum primis in faucibus. Curabitur et eros porttitor, ultricies urna vitae,
++        molestie nibh. Phasellus at commodo eros, non aliquet metus. Sed maximus nisl nec dolor
++        bibendum, vel congue leo egestas.\n\n
++        Sed interdum tortor nibh, in sagittis risus mollis quis. Curabitur mi odio, condimentum sit
++        amet auctor at, mollis non turpis. Nullam pretium libero vestibulum, finibus orci vel,
++        molestie quam. Fusce blandit tincidunt nulla, quis sollicitudin libero facilisis et. Integer
++        interdum nunc ligula, et fermentum metus hendrerit id. Vestibulum lectus felis, dictum at
++        lacinia sit amet, tristique id quam. Cras eu consequat dui. Suspendisse sodales nunc ligula,
++        in lobortis sem porta sed. Integer id ultrices magna, in luctus elit. Sed a pellentesque
++        est.\n\n
++        Aenean nunc velit, lacinia sed dolor sed, ultrices viverra nulla. Etiam a venenatis nibh.
++        Morbi laoreet, tortor sed facilisis varius, nibh orci rhoncus nulla, id elementum leo dui
++        non lorem. Nam mollis ipsum quis auctor varius. Quisque elementum eu libero sed commodo. In
++        eros nisl, imperdiet vel imperdiet et, scelerisque a mauris. Pellentesque varius ex nunc,
++        quis imperdiet eros placerat ac. Duis finibus orci et est auctor tincidunt. Sed non viverra
++        ipsum. Nunc quis augue egestas, cursus lorem at, molestie sem. Morbi a consectetur ipsum, a
++        placerat diam. Etiam vulputate dignissim convallis. Integer faucibus mauris sit amet finibus
++        convallis.\n\n
++        Phasellus in aliquet mi. Pellentesque habitant morbi tristique senectus et netus et
++        malesuada fames ac turpis egestas. In volutpat arcu ut felis sagittis, in finibus massa
++        gravida. Pellentesque id tellus orci. Integer dictum, lorem sed efficitur ullamcorper,
++        libero justo consectetur ipsum, in mollis nisl ex sed nisl. Donec maximus ullamcorper
++        sodales. Praesent bibendum rhoncus tellus nec feugiat. In a ornare nulla. Donec rhoncus
++        libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
++        vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
++    </string>
++    <!-- TODO: Remove or change this placeholder text -->
++    <string name="hello_blank_fragment">Hello blank fragment</string>
+ </resources>
+\ No newline at end of file
+Index: app/src/main/java/com/example/e_commerce/ui/login/fragments/LogInFragment.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/e_commerce/ui/login/fragments/LogInFragment.kt b/app/src/main/java/com/example/e_commerce/ui/login/fragments/LogInFragment.kt
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/java/com/example/e_commerce/ui/login/fragments/LogInFragment.kt	
+@@ -0,0 +1,29 @@
++package com.example.e_commerce.ui.login.fragments
++
++import android.os.Bundle
++import androidx.fragment.app.Fragment
++import android.view.LayoutInflater
++import android.view.View
++import android.view.ViewGroup
++import com.example.e_commerce.R
++
++
++class LogInFragment : Fragment() {
++
++    override fun onCreate(savedInstanceState: Bundle?) {
++        super.onCreate(savedInstanceState)
++
++    }
++
++    override fun onCreateView(
++        inflater: LayoutInflater, container: ViewGroup?,
++        savedInstanceState: Bundle?
++    ): View? {
++        // Inflate the layout for this fragment
++        return inflater.inflate(R.layout.fragment_log_in, container, false)
++    }
++
++    companion object {
++        private const val TAG= "LogIn Fragment"
++    }
++}
+\ No newline at end of file
+Index: app/src/main/java/com/example/e_commerce/ui/login/viewmodel/LogInViewModel.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/e_commerce/ui/login/viewmodel/LogInViewModel.kt b/app/src/main/java/com/example/e_commerce/ui/login/viewmodel/LogInViewModel.kt
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/java/com/example/e_commerce/ui/login/viewmodel/LogInViewModel.kt	
+@@ -0,0 +1,6 @@
++package com.example.e_commerce.ui.login.viewmodel
++
++import androidx.lifecycle.ViewModel
++
++class LogInViewModel: ViewModel() {
++}
+\ No newline at end of file
+Index: app/src/main/res/layout/fragment_log_in.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/fragment_log_in.xml b/app/src/main/res/layout/fragment_log_in.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/layout/fragment_log_in.xml	
+@@ -0,0 +1,21 @@
++<?xml version="1.0" encoding="utf-8"?>
++<layout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools">
++
++    <data>
++
++    </data>
++
++    <FrameLayout
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        tools:context=".ui.login.fragments.LogInFragment">
++
++        <!-- TODO: Update blank fragment layout -->
++        <TextView
++            android:layout_width="match_parent"
++            android:layout_height="match_parent"
++            android:text="@string/hello_blank_fragment" />
++
++    </FrameLayout>
++</layout>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_17\" default=\"true\" project-jdk-name=\"jbr-17\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	
++++ b/.idea/misc.xml	
+@@ -1,4 +1,3 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ExternalStorageConfigurationManager" enabled="true" />
+   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
+Index: app/src/main/java/com/example/e_commerce/ui/login/AuthActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/e_commerce/ui/login/AuthActivity.kt b/app/src/main/java/com/example/e_commerce/ui/login/AuthActivity.kt
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/java/com/example/e_commerce/ui/login/AuthActivity.kt	
+@@ -0,0 +1,24 @@
++package com.example.e_commerce.ui.login
++
++import android.os.Bundle
++import com.google.android.material.snackbar.Snackbar
++import androidx.appcompat.app.AppCompatActivity
++import androidx.navigation.findNavController
++import androidx.navigation.ui.AppBarConfiguration
++import androidx.navigation.ui.navigateUp
++import androidx.navigation.ui.setupActionBarWithNavController
++import com.example.e_commerce.R
++import com.example.e_commerce.databinding.ActivityAuthBinding
++
++class AuthActivity : AppCompatActivity() {
++private lateinit var binding: ActivityAuthBinding
++    override fun onCreate(savedInstanceState: Bundle?) {
++        super.onCreate(savedInstanceState)
++     binding = ActivityAuthBinding.inflate(layoutInflater)
++     setContentView(binding.root)
++
++
++    }
++
++
++}
+\ No newline at end of file
+Index: app/src/main/res/values-w600dp/dimens.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values-w600dp/dimens.xml b/app/src/main/res/values-w600dp/dimens.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/values-w600dp/dimens.xml	
+@@ -0,0 +1,3 @@
++<resources>
++      <dimen name="fab_margin">48dp</dimen>
++   </resources>
+\ No newline at end of file
+Index: .idea/appInsightsSettings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/appInsightsSettings.xml b/.idea/appInsightsSettings.xml
+new file mode 100644
+--- /dev/null	
++++ b/.idea/appInsightsSettings.xml	
+@@ -0,0 +1,26 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="AppInsightsSettings">
++    <option name="tabSettings">
++      <map>
++        <entry key="Firebase Crashlytics">
++          <value>
++            <InsightsFilterSettings>
++              <option name="connection">
++                <ConnectionSetting>
++                  <option name="appId" value="com.example.e_commerce" />
++                  <option name="mobileSdkAppId" value="1:293575409096:android:3d3d8ddf72d79eb52e54fd" />
++                  <option name="projectId" value="e-commerce-7e86e" />
++                  <option name="projectNumber" value="293575409096" />
++                </ConnectionSetting>
++              </option>
++              <option name="signal" value="SIGNAL_UNSPECIFIED" />
++              <option name="timeIntervalDays" value="THIRTY_DAYS" />
++              <option name="visibilityType" value="ALL" />
++            </InsightsFilterSettings>
++          </value>
++        </entry>
++      </map>
++    </option>
++  </component>
++</project>
+\ No newline at end of file
+Index: app/src/main/res/values-w1240dp/dimens.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values-w1240dp/dimens.xml b/app/src/main/res/values-w1240dp/dimens.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/values-w1240dp/dimens.xml	
+@@ -0,0 +1,3 @@
++<resources>
++      <dimen name="fab_margin">200dp</dimen>
++   </resources>
+\ No newline at end of file
+Index: app/src/main/res/values/dimens.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/dimens.xml b/app/src/main/res/values/dimens.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/values/dimens.xml	
+@@ -0,0 +1,3 @@
++<resources>
++      <dimen name="fab_margin">16dp</dimen>
++   </resources>
+\ No newline at end of file
+Index: gradle/libs.versions.toml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>[versions]\r\nagp = \"8.3.2\"\r\nkotlin = \"1.9.0\"\r\ncoreKtx = \"1.13.1\"\r\njunit = \"4.13.2\"\r\njunitVersion = \"1.1.5\"\r\nespressoCore = \"3.5.1\"\r\nappcompat = \"1.6.1\"\r\nmaterial = \"1.12.0\"\r\nactivity = \"1.8.0\"\r\nconstraintlayout = \"2.1.4\"\r\n\r\n[libraries]\r\nandroidx-core-ktx = { group = \"androidx.core\", name = \"core-ktx\", version.ref = \"coreKtx\" }\r\njunit = { group = \"junit\", name = \"junit\", version.ref = \"junit\" }\r\nandroidx-junit = { group = \"androidx.test.ext\", name = \"junit\", version.ref = \"junitVersion\" }\r\nandroidx-espresso-core = { group = \"androidx.test.espresso\", name = \"espresso-core\", version.ref = \"espressoCore\" }\r\nandroidx-appcompat = { group = \"androidx.appcompat\", name = \"appcompat\", version.ref = \"appcompat\" }\r\nmaterial = { group = \"com.google.android.material\", name = \"material\", version.ref = \"material\" }\r\nandroidx-activity = { group = \"androidx.activity\", name = \"activity\", version.ref = \"activity\" }\r\nandroidx-constraintlayout = { group = \"androidx.constraintlayout\", name = \"constraintlayout\", version.ref = \"constraintlayout\" }\r\n\r\n[plugins]\r\nandroidApplication = { id = \"com.android.application\", version.ref = \"agp\" }\r\njetbrainsKotlinAndroid = { id = \"org.jetbrains.kotlin.android\", version.ref = \"kotlin\" }\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/gradle/libs.versions.toml b/gradle/libs.versions.toml
+--- a/gradle/libs.versions.toml	
++++ b/gradle/libs.versions.toml	
+@@ -9,6 +9,8 @@
+ material = "1.12.0"
+ activity = "1.8.0"
+ constraintlayout = "2.1.4"
++navigationFragmentKtx = "2.7.7"
++navigationUiKtx = "2.7.7"
+ 
+ [libraries]
+ androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+@@ -19,6 +21,8 @@
+ material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+ androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
++androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
++androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
+ 
+ [plugins]
+ androidApplication = { id = "com.android.application", version.ref = "agp" }
+Index: app/src/main/res/values-land/dimens.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values-land/dimens.xml b/app/src/main/res/values-land/dimens.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/values-land/dimens.xml	
+@@ -0,0 +1,3 @@
++<resources>
++      <dimen name="fab_margin">48dp</dimen>
++   </resources>
+\ No newline at end of file
+Index: app/src/main/res/values-night/themes.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values-night/themes.xml b/app/src/main/res/values-night/themes.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/values-night/themes.xml	
+@@ -0,0 +1,7 @@
++<resources xmlns:tools="http://schemas.android.com/tools">
++  <!-- Base application theme. -->
++  <style name="Base.Theme.ECommerce" parent="Theme.Material3.DayNight.NoActionBar">
++    <!-- Customize your dark theme here. -->
++    <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
++  </style>
++</resources>
+\ No newline at end of file
+Index: app/src/main/res/values-v23/themes.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values-v23/themes.xml b/app/src/main/res/values-v23/themes.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/values-v23/themes.xml	
+@@ -0,0 +1,8 @@
++<resources xmlns:tools="http://schemas.android.com/tools">
++  <style name="Theme.ECommerce" parent="Base.Theme.ECommerce">
++    <!-- Transparent system bars for edge-to-edge. -->
++    <item name="android:navigationBarColor">@android:color/transparent</item>
++    <item name="android:statusBarColor">@android:color/transparent</item>
++    <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
++  </style>
++</resources>
+\ No newline at end of file
+Index: app/src/main/res/layout/activity_auth.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_auth.xml b/app/src/main/res/layout/activity_auth.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/layout/activity_auth.xml	
+@@ -0,0 +1,28 @@
++<?xml version="1.0" encoding="utf-8"?>
++<layout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
++    xmlns:tools="http://schemas.android.com/tools">
++
++    <data>
++
++    </data>
++
++    <androidx.constraintlayout.widget.ConstraintLayout
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        android:fitsSystemWindows="true"
++        tools:context=".ui.login.AuthActivity">
++
++        <androidx.fragment.app.FragmentContainerView
++            android:id="@+id/nav_host_fragment"
++            android:name="androidx.navigation.fragment.NavHostFragment"
++            app:navGraph="@navigation/login_graph"
++            android:layout_width="match_parent"
++            android:layout_height="match_parent"
++            app:layout_constraintBottom_toBottomOf="parent"
++            app:layout_constraintEnd_toEndOf="parent"
++            app:layout_constraintStart_toStartOf="parent"
++            app:layout_constraintTop_toTopOf="parent" />
++
++    </androidx.constraintlayout.widget.ConstraintLayout>
++</layout>
+\ No newline at end of file
