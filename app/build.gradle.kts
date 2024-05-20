@@ -4,6 +4,10 @@ plugins {
 
     //firebase service
     id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
+    //dataBinding
+    id("kotlin-kapt")
+
 }
 
 android {
@@ -36,6 +40,11 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -50,8 +59,20 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     //Splash screen Android 12
     implementation("androidx.core:core-splashscreen:1.0.0")
+
     //add fireBase dependencies
     implementation(platform("com.google.firebase:firebase-bom:33.0.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-crashlytics")
+    //reactive network check internet is work or not
+    implementation("com.github.pwittchen:reactivenetwork-rx2:3.0.8")
+
+
+    // Kotlin navigation
+    val nav_version = "2.7.7"
+    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-dynamic-features-fragment:$nav_version")
+
+
 }
