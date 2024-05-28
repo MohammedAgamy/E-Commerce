@@ -1,26 +1,25 @@
-package com.example.e_commerce.ui.login.viewmodel
+package com.example.e_commerce.ui.home.common
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.e_commerce.data.repository.user.UserPreferenceRepository
 import com.example.e_commerce.data.repository.user.UserRepositoryPreferenceIml
-import com.example.e_commerce.ui.home.common.UserViewModel
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
-class LogInViewModel(
-    val userPrefer: UserPreferenceRepository
-) : ViewModel() {
+class UserViewModel(private val userPreferenceRepository:UserPreferenceRepository):ViewModel() {
 
-    fun saveLogInState(isLogin:Boolean)
-    {
-        viewModelScope.launch{
+    suspend fun isUserLogin() = userPreferenceRepository.isUSerLoggedIn()
 
+    fun setIsLogIn(b:Boolean){
+        viewModelScope.launch (IO){
+            userPreferenceRepository.saveLogInState(b)
         }
     }
 
-    class LogInViewModelFactory(private val userPreferenceRepository: UserRepositoryPreferenceIml):
-        ViewModelProvider.Factory{
+
+    class UserViewModelFactory(private val userPreferenceRepository:UserRepositoryPreferenceIml):ViewModelProvider.Factory{
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(UserViewModel::class.java))
             {
@@ -31,5 +30,6 @@ class LogInViewModel(
 
         }
     }
+
 
 }

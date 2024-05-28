@@ -14,6 +14,6 @@ object DataStoreKeys {
     val SAVE_USER_ID= stringPreferencesKey("user_id")
 
 }
-
+//create file shared to store data
 val Context.dataStore: DataStore<androidx.datastore.preferences.core.Preferences> by preferencesDataStore(name = E_Commerce_Preference)
 
