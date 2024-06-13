@@ -11,39 +11,43 @@ import android.view.animation.AnticipateInterpolator
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.example.e_commerce.R
 import com.example.e_commerce.data.datasurce.datastore.UserPreferenceDataSource
-import com.example.e_commerce.data.repository.user.UserRepositoryPreferenceIml
+import com.example.e_commerce.data.repository.user.UserDataStoreRepositoryImpl
+import com.example.e_commerce.data.repository.user.UserPreferenceRepository
 import com.example.e_commerce.ui.home.common.UserViewModel
 import com.example.e_commerce.ui.login.AuthActivity
-import com.example.e_commerce.ui.login.viewmodel.LogInViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class MainActivity : AppCompatActivity() {
 
-    private val userViewModel: UserViewModel by viewModels {
-        LogInViewModel.LogInViewModelFactory(
-            UserRepositoryPreferenceIml(
-                UserPreferenceDataSource(
-                    this
-                )
-            )
-        )
+    private val userViewModel: UserViewModel by viewModels(){
+        UserViewModel.UserViewModelFactory(UserDataStoreRepositoryImpl(UserPreferenceDataSource(this@MainActivity)))
     }
 
-    override fun onCreate(
-        savedInstanceState: Bundle?
-    ) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         initSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        /*
+        val isLoggedIn = runBlocking { userViewModel.isUserLogin().first() }
+        if (!isLoggedIn) {
+            getAuthActivity()
+            return
+        }*/
+       /* lifecycleScope.launch(Dispatchers.Main) {
+            val isLogin = userViewModel.isUserLogin().first()
+            Log.d("TAG", "onCreate is LogIn $isLogin")
+            if (isLogin) {
+                setContentView(R.layout.activity_main)
+            } else {
+                getAuthActivity()
+            }
+        }*/
 
-        lifecycleScope.launch(Dispatchers.Main) {
+        runBlocking {
             val isLogin = userViewModel.isUserLogin().first()
             Log.d("TAG", "onCreate is LogIn $isLogin")
             if (isLogin) {
@@ -52,9 +56,9 @@ class MainActivity : AppCompatActivity() {
                 getAuthActivity()
             }
         }
+        }
 
 
-    }
 
     fun getAuthActivity() {
         val intent = Intent(this, AuthActivity::class.java).apply {

@@ -2,7 +2,7 @@ package com.example.e_commerce.data.repository.user
 
 import kotlinx.coroutines.flow.Flow
 
-interface UserPreferenceRepository {
+interface UserPreferenceRepository{
     // iniFun to store data used interface principle (solid)
     suspend fun isUSerLoggedIn(): Flow<Boolean>
     suspend fun saveLogInState(isLogIn:Boolean)
